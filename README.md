@@ -1,27 +1,43 @@
-# AngularGithub
+# Issue list for Angular GitHub project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.1.
+#### In this task you should implement an application similar to the issue list of “angular/angular” GitHub repo (https://github.com/angular/angular/issues). Feel free to implement your own simplified design and unique approach to this problem. There is no right or wrong solution. Your code should be self explanatory, but feel free to write comments if you feel that some part of the code is not that easily readable or understandable.
+You can write it in Angular, React or in plain Javascript.
 
-## Development server
+## Description:
+First screen should show all available issues of “angular/angular” GitHub repo with these information shown:
+state
+title
+comment count
+issue number (starting with #)
+valid date information, created at or closed at depends on state
+These issues should be filterable by state and sortable by number of comments.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+You should be able to visit any issue after clicking on it. There need to be this information shown:
+state
+title
+body
+comment count
+issue number (starting with #)
+valid date information, created at or closed at depends on state
+optional: comments, all comments sorted from the newest to oldest with these information shown:
+user photo
+username
+comment text
 
-## Code scaffolding
+## Requirements:
+- Issues need to be paginated.
+- Issues need to be filterable by state.
+- Issues need to be sortable by number of comments.
+- There needs to be a README.md file with instructions on how to run your project.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# How to use this project
 
-## Build
+## Requirements
+- computer
+- node and npm
+- angular/cli
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## How to run
+### npm install
+### ng serve
+### open ``localhost:4200``

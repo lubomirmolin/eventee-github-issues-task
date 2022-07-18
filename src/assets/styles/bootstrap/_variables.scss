@@ -1,0 +1,44 @@
+@import "~bootstrap/scss/functions";
+
+// Default variable overrides
+$primary: #3c2c87;
+$secondary: #2782cd;
+$success: #1c9c5f;
+$info: #ef4454;
+$warning: #dec91e;
+$danger: #ea250e;
+$light: #dbd8d9;
+$dark: #11113f;
+$white: #ffffff;
+
+$body-bg: $light;
+$body-color: $dark;
+
+/* Borders */
+$border-radius: 10px;
+
+/* Typography
+   Fonts */
+$font-family-default: 'Nunito', sans-serif;
+$font-family-decorative: 'Poppins', sans-serif;
+
+$font-family-base: $font-family-default,
+    /* Safari for OS X and iOS (San Francisco) */
+-apple-system,
+    /* Chrome < 56 for OS X (San Francisco) */
+BlinkMacSystemFont,
+    /* Windows */
+"Segoe UI",
+    /* Android */
+"Roboto",
+    /* Basic web fallback */
+"Helvetica Neue", Arial, sans-serif,
+    /* Emoji fonts */
+"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+$font-size-base: 0.8125rem;
+$font-size-sm: 0.7rem;
+$font-weight-bold: 500;
+
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
