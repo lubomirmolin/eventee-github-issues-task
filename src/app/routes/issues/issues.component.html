@@ -1,14 +1,7 @@
-<div class="text-secondary px-4 py-5 text-center">
-    <div class="py-5 d-flex flex-column align-items-center">
-        <img src="assets/images/angular_logo.svg" width="50"/>
+<div class="px-4 py-5">
+    <div class="py-5 d-flex flex-column align-items-center text-center text-secondary">
+        <img src="assets/images/angular_logo.svg" width="50" alt="logo"/>
         <h1 class="display-5 fw-bold text-white">Issues on Github @angular/angular</h1>
-<!--        <div class="col-lg-6 mx-auto">-->
-<!--            <p class="fs-5 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>-->
-<!--            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">-->
-<!--                <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom button</button>-->
-<!--                <button type="button" class="btn btn-outline-light btn-lg px-4">Secondary</button>-->
-<!--            </div>-->
-<!--        </div>-->
     </div>
 
     <div class="issues-table rounded">
@@ -16,31 +9,40 @@
             <div class="btn-group d-flex ml-2" dropdown>
                 <button id="button-state" dropdownToggle type="button" class="btn btn-secondary dropdown-toggle"
                         aria-controls="dropdown-state">
-                    State <span class="caret"></span>
+                    State: <b>{{ stateFilter$.value }}</b> <span class="caret"></span>
                 </button>
                 <ul id="dropdown-state" *dropdownMenu class="dropdown-menu dropdown-menu-right"
                     role="menu" aria-labelledby="button-state">
-                    <li role="menuitem"><a class="dropdown-item" href="#">All</a></li>
-                    <li role="menuitem"><a class="dropdown-item" href="#">Open</a></li>
-                    <li role="menuitem"><a class="dropdown-item" href="#">Closed</a></li>
+                    <li role="menuitem"><a class="dropdown-item" (click)="stateFilter$.next(IssueState.Open)">Open</a></li>
+                    <li role="menuitem"><a class="dropdown-item" (click)="stateFilter$.next(IssueState.Closed)">Closed</a></li>
                 </ul>
             </div>
             <div class="btn-group d-flex ms-2" dropdown>
                 <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
                         aria-controls="dropdown-animated">
-                    Sort <span class="caret"></span>
+                    Sort: <b>{{ sortDirection$.value }}</b> <span class="caret"></span>
                 </button>
                 <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu dropdown-menu-right"
                     role="menu" aria-labelledby="button-animated">
-                    <li role="menuitem"><a class="dropdown-item" href="#">Most commented</a></li>
-                    <li role="menuitem"><a class="dropdown-item" href="#">Least commented</a></li>
+                    <li role="menuitem"><a class="dropdown-item" (click)="sortDirection$.next(IssuesSortDirection.Desc)">Most commented</a></li>
+                    <li role="menuitem"><a class="dropdown-item" (click)="sortDirection$.next(IssuesSortDirection.Asc)">Least commented</a></li>
                 </ul>
             </div>
         </div>
-        <div class="table-body">
-            <app-issue-row
-                issue="">
+        <div class="table-body d-flex flex-column">
+            <app-issue-row *ngFor="let issue of issuesQuery.selectAll() | async"
+                [issue]="issue">
             </app-issue-row>
+        </div>
+
+        <div class="table-footer p-4" *ngIf="(totalCount$ | async)! > 0">
+            <app-paging-controls
+                [current]="(page$ | async)!"
+                [total]="(totalCount$ | async)!"
+                (next)="page$.next(page$.value + 1)"
+                (previous)="page$.next(page$.value - 1)"
+                (goTo)="page$.next($event)">
+            </app-paging-controls>
         </div>
     </div>
 </div>

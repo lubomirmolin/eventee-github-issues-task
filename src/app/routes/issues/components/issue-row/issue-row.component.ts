@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Issue} from "../../../../global/models/issue";
+import {Issue, IssueState} from '../../../../global/models/issue';
 
 @Component({
     selector: 'app-issue-row',
@@ -7,6 +7,8 @@ import {Issue} from "../../../../global/models/issue";
     styleUrls: ['./issue-row.component.scss']
 })
 export class IssueRowComponent implements OnInit {
+
+    public IssueState = IssueState;
 
     @Input() public issue: Issue;
 

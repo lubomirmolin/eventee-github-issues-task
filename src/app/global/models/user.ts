@@ -1,11 +1,23 @@
-export class User {
-    public id?: number;
-    public avatar_url?: string;
-    public url?: string;
 
-    constructor({ id, avatar_url, url }: Partial<User>) {
-        this.id = id;
-        this.avatar_url = avatar_url;
-        this.url = url;
+export class UserFromServer {
+    id?: number;
+    avatar_url?: string;
+    url?: string;
+    login?: string;
+}
+
+export class User {
+    id?: number;
+    avatarUrl?: string;
+    url?: string;
+    login?: string;
+}
+
+export function createUser(params: Partial<UserFromServer>): User {
+    return {
+        id: params.id,
+        login: params.login,
+        url: params.url,
+        avatarUrl: params.avatar_url
     }
 }

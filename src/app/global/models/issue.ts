@@ -1,45 +1,55 @@
-import {User} from "./user";
+import {createUser, User, UserFromServer} from './user';
 import {Label} from "./label";
 import {DateTime} from 'luxon';
 
-export class Issue {
-    id?: number;
-    url?: string;
-    number?: number;
-    state?: string;
-    title?: string;
-    body?: string;
-    user?: User;
-    labels?: Label[];
-    locked?: boolean;
-    comments?: number;
-    created_at?: string;
-    updated_at?: string;
+export enum IssueState {
+    Open = 'open',
+    Closed = 'closed'
+}
 
-    constructor({ id, url, number, state, title, body, user, labels, locked, comments, created_at, updated_at }: Partial<Issue>) {
-        this.id = id;
-        this.url = url;
-        this.number = number;
-        this.state = state;
-        this.title = title;
-        this.body = body;
-        this.user = user;
-        this.labels = labels;
-        this.locked = locked;
-        this.comments = comments;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
-    }
+export interface IssueFromServer {
+    id: number;
+    url: string;
+    number: number;
+    state: string;
+    title: string;
+    body: string;
+    user: UserFromServer;
+    labels: Label[];
+    locked: boolean;
+    comments: number;
+    created_at: string;
+    updated_at: string;
+}
 
-    get createdAtDateTime(): DateTime | null {
-        if (this.created_at) {
-            return null;
-        }
+export interface Issue {
+    id: number;
+    url: string;
+    number: number;
+    state: IssueState;
+    title: string;
+    body: string;
+    user: UserFromServer;
+    labels: Label[];
+    locked: boolean;
+    comments: number;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+}
 
-        return DateTime.fromISO(this.created_at!);
-    }
-
-    get updatedAtDateTime(): DateTime | null {
-        return DateTime.fromISO(this.updated_at!);
-    }
+export function createIssue(params: Partial<IssueFromServer>): Issue {
+    return {
+        id: params.id,
+        url: params.url,
+        number: params.number,
+        state: params.state,
+        title: params.title,
+        body: params.body,
+        user: params.user ? createUser(params.user) : null,
+        labels: params.labels || [],
+        locked: params.locked,
+        comments: params.comments,
+        createdAt: params.created_at ? DateTime.fromISO(params.created_at) : null,
+        updatedAt: params.updated_at ? DateTime.fromISO(params.updated_at) : null
+    } as Issue;
 }

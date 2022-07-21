@@ -1,0 +1,60 @@
+@import "../../../../assets/styles/bootstrap/variables";
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    margin: 0 4px;
+}
+
+button {
+    background-color: transparent;
+    border: 2px solid transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    width: 50px;
+    color: $body-color;
+    padding: 8px 16px;
+    border-radius: $border-radius;
+}
+
+button.current {
+    background-color: $primary;
+    color: white;
+}
+
+button[disabled] {
+    cursor: default;
+    color: #757575;
+    background: transparent;
+}
+
+button[disabled]:hover {
+    border: 2px solid transparent;
+}
+
+button:not([disabled]):hover {
+    border: 2px solid $primary;
+    color: white;
+    cursor: pointer;
+    outline: none;
+}
