@@ -32,7 +32,8 @@ export interface Issue {
     user: UserFromServer;
     labels: Label[];
     locked: boolean;
-    comments: number;
+    commentsCount: number;
+    comments: Comment[];
     createdAt: DateTime;
     updatedAt: DateTime;
 }
@@ -48,7 +49,7 @@ export function createIssue(params: Partial<IssueFromServer>): Issue {
         user: params.user ? createUser(params.user) : null,
         labels: params.labels || [],
         locked: params.locked,
-        comments: params.comments,
+        commentsCount: params.comments,
         createdAt: params.created_at ? DateTime.fromISO(params.created_at) : null,
         updatedAt: params.updated_at ? DateTime.fromISO(params.updated_at) : null
     } as Issue;

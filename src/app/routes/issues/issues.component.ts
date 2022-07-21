@@ -2,7 +2,17 @@ import {Component, OnInit} from '@angular/core';
 import {IssuesService, IssuesSortDirection} from '../../store/issues/issues.service';
 import {IssuesQuery} from '../../store/issues/issues.query';
 import {IssueState} from '../../global/models/issue';
-import {BehaviorSubject, combineLatest, distinctUntilChanged, of, switchMap, takeUntil, throwError, zip} from 'rxjs';
+import {
+    BehaviorSubject,
+    combineLatest,
+    distinctUntilChanged,
+    of,
+    skip,
+    switchMap,
+    takeUntil,
+    throwError,
+    zip
+} from 'rxjs';
 import {DisposableComponent} from '../../shared/utils/disposable-component';
 import {catchError} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
@@ -30,14 +40,16 @@ export class IssuesComponent extends DisposableComponent implements OnInit {
         super();
 
         this.page$.asObservable().pipe(
-            distinctUntilChanged(),
             takeUntil(this.componentDestroyed),
             switchMap((page) => {
                 return this.issuesService.getIssues(page, this.stateFilter$.value, this.sortDirection$.value).pipe(
                     catchError(response => {
                         if (response?.error?.message) {
                             this.toastrService.error(response.error.message)
+                        } else if (response?.message) {
+                            this.toastrService.error(`${response?.message}`)
                         }
+
                         return of(undefined);
                     })
                 )
@@ -48,6 +60,7 @@ export class IssuesComponent extends DisposableComponent implements OnInit {
             this.stateFilter$.asObservable(),
             this.sortDirection$.asObservable()
         ]).pipe(
+            skip(1),
             takeUntil(this.componentDestroyed)
         ).subscribe(() => {
             this.page$.next(1)
