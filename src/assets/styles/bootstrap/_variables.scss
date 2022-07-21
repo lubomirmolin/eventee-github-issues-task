@@ -1,8 +1,7 @@
-@import "~bootstrap/scss/functions";
 
 // Default variable overrides
-$primary: #3c2c87;
-$secondary: #2782cd;
+$primary: #785cf1;
+$secondary: #175386;
 $success: #1c9c5f;
 $info: #ef4454;
 $warning: #dec91e;
@@ -11,11 +10,11 @@ $light: #dbd8d9;
 $dark: #11113f;
 $white: #ffffff;
 
-$body-bg: $light;
-$body-color: $dark;
+$body-bg: $dark;
+$body-color: $light;
 
 /* Borders */
-$border-radius: 10px;
+$border-radius: 5px;
 
 /* Typography
    Fonts */
@@ -40,5 +39,8 @@ $font-size-base: 0.8125rem;
 $font-size-sm: 0.7rem;
 $font-weight-bold: 500;
 
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
+/* Buttons */
+$btn-padding-x: 1rem;
+
+/* Dropdown */
+

@@ -1,7 +1,11 @@
 
-/* Importing Custom global styles */
-@import "./assets/styles/global";
+/* Importing Variables to override them before Bootstrap is loaded */
+@import "./assets/styles/bootstrap/variables";
 
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
+
+@import "./assets/styles/global";
+@import "./assets/styles/bootstrap/dropdown";
+@import "./assets/styles/bootstrap/buttons";
 

@@ -1,2 +1,11 @@
 @import "./bootstrap/variables";
-@import "./bootstrap/buttons";
+
+::-moz-selection { /* Code for Firefox */
+    color: $light;
+    background: $primary;
+}
+
+::selection {
+    color: $light;
+    background: $primary;
+}
