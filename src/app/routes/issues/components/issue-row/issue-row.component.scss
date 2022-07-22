@@ -2,4 +2,10 @@
 
 :host {
     border-bottom: 1px solid $dark;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+:host:hover {
+    background: transparentize($light, 0.9);
 }

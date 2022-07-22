@@ -1,6 +1,7 @@
 import {createUser, User, UserFromServer} from './user';
 import {Label} from "./label";
 import {DateTime} from 'luxon';
+import {Comment} from './comment';
 
 export enum IssueState {
     Open = 'open',
@@ -50,6 +51,7 @@ export function createIssue(params: Partial<IssueFromServer>): Issue {
         labels: params.labels || [],
         locked: params.locked,
         commentsCount: params.comments,
+        comments: [],
         createdAt: params.created_at ? DateTime.fromISO(params.created_at) : null,
         updatedAt: params.updated_at ? DateTime.fromISO(params.updated_at) : null
     } as Issue;

@@ -1,0 +1,28 @@
+<ng-container *ngIf="issuesQuery.selectActive() | async; let issue">
+    <div class="modal-header">
+        <h5 class="modal-title font-weight-bold">{{ issue?.title }}</h5>
+        <button type="button" class="btn btn-link text-primary" (click)="ref.hide()"  data-bs-dismiss="modal" aria-label="Close">
+            <i class="mdi mdi-cross"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>{{ issue?.body }}</p>
+        <hr/>
+
+        <infinite-scroll (scrolled)="loadMore(issue)">
+            <div class="d-flex flex-column">
+                <div class="d-flex flex-column border rounded-1 p-2 mt-2" *ngFor="let comment of issue.comments">
+                    <p class="p-0">{{ comment.body }}</p>
+                    <div class="d-flex align-items-center">
+                        <img class="img-thumbnail rounded-circle me-4" [src]="comment.user?.avatarUrl" width="25" height="25" />
+                        <b>{{ comment.user?.login }}</b>
+                    </div>
+                </div>
+            </div>
+        </infinite-scroll>
+
+        <div class="d-flex w-100 align-items-center justify-content-center py-5" *ngIf="commentsLoading">
+            <h4 class="font-weight-bold">Loading...</h4>
+        </div>
+    </div>
+</ng-container>

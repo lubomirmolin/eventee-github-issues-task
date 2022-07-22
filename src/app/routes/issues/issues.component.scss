@@ -1,16 +1,33 @@
 @import "../../../assets/styles/bootstrap/variables";
 
 .issues-table {
-    background: rgba(255, 255, 255, 0.05);
+    background: transparentize($light, 0.9);
     border: 1px solid $dark;
 
     .table-header {
-        background: rgba(255, 255, 255, 0.1);
+        background: transparentize($light, 0.9);
         border-bottom: 1px solid $dark;
     }
 
+    .table-body {
+        position: relative;
+    }
+
     .table-footer {
-        background: rgba(255, 255, 255, 0.1);
+        background: transparentize($light, 0.9);
         border-bottom: 1px solid $dark;
     }
+}
+
+.loading-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: transparentize($dark, 0.3);
+    color: $light;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

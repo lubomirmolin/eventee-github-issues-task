@@ -18,4 +18,6 @@ export class IssueRowComponent implements OnInit {
     ngOnInit(): void {
     }
 
+
+
 }

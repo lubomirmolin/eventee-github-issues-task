@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {IssuesService, IssuesSortDirection} from '../../store/issues/issues.service';
 import {IssuesQuery} from '../../store/issues/issues.query';
-import {IssueState} from '../../global/models/issue';
+import {Issue, IssueState} from '../../global/models/issue';
 import {
     BehaviorSubject,
     combineLatest,
@@ -16,6 +16,8 @@ import {
 import {DisposableComponent} from '../../shared/utils/disposable-component';
 import {catchError} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
+import {BsModalService} from 'ngx-bootstrap/modal';
+import {IssuesDetailModalComponent} from './components/_modals/issues-detail-modal/issues-detail-modal.component';
 
 @Component({
     selector: 'app-issues',
@@ -35,7 +37,8 @@ export class IssuesComponent extends DisposableComponent implements OnInit {
     constructor(
         public issuesQuery: IssuesQuery,
         private issuesService: IssuesService,
-        private toastrService: ToastrService
+        private toastrService: ToastrService,
+        private modalService: BsModalService,
     ) {
         super();
 
@@ -77,5 +80,12 @@ export class IssuesComponent extends DisposableComponent implements OnInit {
     }
 
     ngOnInit(): void {
+    }
+
+    issueClicked(issue: Issue) {
+        this.issuesService.setActive(issue.id);
+
+        const ref = this.modalService.show(IssuesDetailModalComponent);
+        (ref.content as IssuesDetailModalComponent).loadIssueComments(issue);
     }
 }

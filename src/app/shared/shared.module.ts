@@ -4,9 +4,12 @@ import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import { DateTimeToRelativePipe } from './pipes/datetime-to-relative.pipe';
 import { PagingControlsComponent } from './components/paging-controls/paging-controls.component';
+import {BsModalService, ModalModule} from 'ngx-bootstrap/modal';
+import {InfiniteScrollComponent} from './components/infinite-scroll/infinite-scroll.component';
 
 const components = [
-    PagingControlsComponent
+    PagingControlsComponent,
+    InfiniteScrollComponent
 ];
 
 const pipes = [
@@ -22,6 +25,7 @@ const pipes = [
         CommonModule,
         BsDropdownModule.forRoot(),
         TooltipModule.forRoot(),
+        ModalModule.forRoot(),
     ],
     exports: [
         BsDropdownModule,

@@ -30,9 +30,16 @@
             </div>
         </div>
         <div class="table-body d-flex flex-column">
-            <app-issue-row *ngFor="let issue of issuesQuery.selectAll() | async"
-                [issue]="issue">
+            <app-issue-row
+                *ngFor="let issue of issuesQuery.selectAll() | async"
+               (click)="issueClicked(issue)"
+                class="cursor-pointer"
+                           [issue]="issue">
             </app-issue-row>
+
+            <div class="loading-overlay" *ngIf="issuesQuery.selectLoading() | async">
+                <h5 class="font-weight-bold">Loading...</h5>
+            </div>
         </div>
 
         <div class="table-footer p-4" *ngIf="(totalCount$ | async)! > 0">

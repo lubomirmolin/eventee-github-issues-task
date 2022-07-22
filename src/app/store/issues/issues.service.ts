@@ -4,7 +4,9 @@ import {environment} from '../../../environments/environment';
 import {catchError, finalize, map, tap} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {IssuesStore} from './issues.store';
-import {createIssue, Issue, IssueState} from '../../global/models/issue';
+import {createIssue, Issue, IssueFromServer, IssueState} from '../../global/models/issue';
+import {CommentFromServer, Comment, createComment} from '../../global/models/comment';
+import {ID} from '@datorama/akita';
 
 export enum IssuesSortDirection {
     Asc = 'asc',
@@ -52,8 +54,8 @@ export class IssuesService {
         params = params.set('per_page', perPage);
         params = params.set('page', page);
 
-		return this.http.get<Issue[]>(`${environment.appApi.baseUrl}/repos/angular/angular/issues`, {params}).pipe(
-			map((response: Issue[]) => {
+		return this.http.get<IssueFromServer[]>(`${environment.appApi.baseUrl}/repos/angular/angular/issues`, {params}).pipe(
+			map((response: IssueFromServer[]) => {
                 const result = response.map(issue => createIssue(issue));
                 this.issuesStore.set(result);
                 return result;
@@ -64,4 +66,38 @@ export class IssuesService {
 			finalize(() => this.issuesStore.setLoading(false))
 		);
 	}
+
+    getIssueComments(issue: Issue, page: number): Observable<Comment[]> {
+        let params = new HttpParams();
+        params = params.set('page', page);
+
+        return this.http.get<CommentFromServer[]>(`${environment.appApi.baseUrl}/repos/angular/angular/issues/${issue.number}/comments`, {params}).pipe(
+            map((response: CommentFromServer[]) => {
+                const result = response.map(comment => createComment(comment));
+                this.issuesStore.update(issue.id, issue => ({
+                    ...issue,
+                    comments: [...issue.comments, ...result]
+                }));
+                return result;
+            }),
+            catchError((error: HttpErrorResponse) => {
+                return throwError(error);
+            })
+        );
+    }
+
+    setActive(id: number) {
+        this.issuesStore.setActive(id);
+    }
+
+    removeActive() {
+        this.issuesStore.setActive(null);
+    }
+
+    clearComments(activeId: ID) {
+        this.issuesStore.update(activeId, issue => ({
+            ...issue,
+            comments: []
+        }));
+    }
 }
