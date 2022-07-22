@@ -11,6 +11,7 @@
 
     .table-body {
         position: relative;
+        min-height: 200px;
     }
 
     .table-footer {
@@ -30,4 +31,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+app-issue-row {
+    border-bottom: 1px solid $dark;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+app-issue-row:hover {
+    background: transparentize($light, 0.9);
 }

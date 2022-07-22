@@ -41,3 +41,10 @@ comment text
 ### npm install
 ### ng serve
 ### open ``localhost:4200``
+
+## Room for improvement
+
+- unit tests
+- add search
+- the project uses "search" api to find total count of issues and then uses different api to get the issues because of bug in GitHub api returning issues in "search" api in wrong order. So this could be maybe done different way, if GitHub fixes their api
+- mobile support, right now due to time constraints the mobile lacks better support, but it should be working just fine

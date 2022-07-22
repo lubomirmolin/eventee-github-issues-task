@@ -1,8 +1,11 @@
 <ng-container *ngIf="issuesQuery.selectActive() | async; let issue">
-    <div class="modal-header">
-        <h5 class="modal-title font-weight-bold">{{ issue?.title }}</h5>
-        <button type="button" class="btn btn-link text-primary" (click)="ref.hide()"  data-bs-dismiss="modal" aria-label="Close">
-            <i class="mdi mdi-cross"></i>
+    <div class="modal-header px-0">
+        <app-issue-row [issue]="issue">
+        </app-issue-row>
+<!--        <h5 class="modal-title font-weight-bold">{{ issue?.title }}</h5>-->
+        <button type="button" class="btn btn-link text-white icon-big"
+                (click)="ref.hide()"  data-bs-dismiss="modal" aria-label="Close">
+            <i class="mdi mdi-close"></i>
         </button>
     </div>
     <div class="modal-body">
@@ -11,11 +14,13 @@
 
         <infinite-scroll (scrolled)="loadMore(issue)">
             <div class="d-flex flex-column">
-                <div class="d-flex flex-column border rounded-1 p-2 mt-2" *ngFor="let comment of issue.comments">
+                <h6>Issue Comments:</h6>
+                <div class="d-flex flex-column comment rounded-1 p-4 mt-2" *ngFor="let comment of issue.comments">
                     <p class="p-0">{{ comment.body }}</p>
                     <div class="d-flex align-items-center">
                         <img class="img-thumbnail rounded-circle me-4" [src]="comment.user?.avatarUrl" width="25" height="25" />
                         <b>{{ comment.user?.login }}</b>
+                        <span class="ms-auto">{{ comment?.createdAt | dateTimeToFormat: 'yyyy LLL dd' }}</span>
                     </div>
                 </div>
             </div>

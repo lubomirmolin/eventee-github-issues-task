@@ -6,6 +6,8 @@ import { DateTimeToRelativePipe } from './pipes/datetime-to-relative.pipe';
 import { PagingControlsComponent } from './components/paging-controls/paging-controls.component';
 import {BsModalService, ModalModule} from 'ngx-bootstrap/modal';
 import {InfiniteScrollComponent} from './components/infinite-scroll/infinite-scroll.component';
+import { DateTimeToFormatPipe } from './pipes/datetime-to-format.pipe';
+import { DateTimeToIsoDatePipe } from './pipes/datetime-to-iso-date.pipe';
 
 const components = [
     PagingControlsComponent,
@@ -13,7 +15,9 @@ const components = [
 ];
 
 const pipes = [
-    DateTimeToRelativePipe
+    DateTimeToRelativePipe,
+    DateTimeToFormatPipe,
+    DateTimeToIsoDatePipe
 ]
 
 @NgModule({

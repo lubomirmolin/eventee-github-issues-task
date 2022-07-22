@@ -8,10 +8,16 @@
 
     <div class="d-flex flex-column align-items-start flex-grow-1 ms-4">
         <h5 class="font-weight-bold">{{ issue?.title }}</h5>
-        <ul class="list-inline">
+        <ul class="list-inline mb-0">
             <li class="list-inline-item">#{{ issue?.number }}</li>
-            <li class="list-inline-item">{{ issue?.state }}</li>
-            <li class="list-inline-item">{{ issue?.createdAt | dateTimeToRelative }}</li>
+            <li class="list-inline-item" *ngIf="issue?.state === IssueState.Open">
+                opened
+                {{ issue?.createdAt | dateTimeToRelative }}
+            </li>
+            <li class="list-inline-item" *ngIf="issue?.state === IssueState.Closed">
+                closed
+                {{ issue?.closedAt | dateTimeToRelative }}
+            </li>
             <li class="list-inline-item">by <a href="{{ issue?.user?.url }}" target="_blank">{{ issue?.user?.login }}</a></li>
         </ul>
     </div>

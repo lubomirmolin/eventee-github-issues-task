@@ -85,7 +85,7 @@ export class IssuesComponent extends DisposableComponent implements OnInit {
     issueClicked(issue: Issue) {
         this.issuesService.setActive(issue.id);
 
-        const ref = this.modalService.show(IssuesDetailModalComponent);
+        const ref = this.modalService.show(IssuesDetailModalComponent, {class: 'modal-lg'});
         (ref.content as IssuesDetailModalComponent).loadIssueComments(issue);
     }
 }

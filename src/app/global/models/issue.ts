@@ -20,6 +20,7 @@ export interface IssueFromServer {
     locked: boolean;
     comments: number;
     created_at: string;
+    closed_at: string;
     updated_at: string;
 }
 
@@ -36,6 +37,7 @@ export interface Issue {
     commentsCount: number;
     comments: Comment[];
     createdAt: DateTime;
+    closedAt: DateTime;
     updatedAt: DateTime;
 }
 
@@ -53,6 +55,7 @@ export function createIssue(params: Partial<IssueFromServer>): Issue {
         commentsCount: params.comments,
         comments: [],
         createdAt: params.created_at ? DateTime.fromISO(params.created_at) : null,
+        closedAt: params.closed_at ? DateTime.fromISO(params.closed_at) : null,
         updatedAt: params.updated_at ? DateTime.fromISO(params.updated_at) : null
     } as Issue;
 }
